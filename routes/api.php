@@ -22,3 +22,12 @@ Route::get('/user', function() {
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Route::resource('items', 'ItemController');
+Route::get('/items', 'ItemController@index')->name('items.index');
+Route::get('/items/{id}', 'ItemController@show')->name('items.show');
+Route::post('/items', 'ItemController@store');
+Route::post('/items/{id}/comments', 'ItemController@storeComment')->name('items.comment');
+
+Route::put('/items/{id}/like', 'ItemController@like')->name('items.like');
+Route::delete('/items/{id}/like', 'ItemController@unlike');

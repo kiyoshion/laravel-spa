@@ -11,6 +11,12 @@
             <li v-else>
                 <router-link to="/login">Login</router-link>
             </li>
+            <li>
+                <router-link to="/items">Items</router-link>
+            </li>
+            <li v-if="isLogin">
+                <router-link to="/items/create">ItemCreate</router-link>
+            </li>
         </ul>
     </nav>
 </template>
