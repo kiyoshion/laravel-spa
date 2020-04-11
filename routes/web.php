@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('{any?}', 'PageController@index')
     ->where('any', '.+')
     ->name('index');

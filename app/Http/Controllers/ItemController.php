@@ -13,7 +13,7 @@ class ItemController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('verified')->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::with(['user', 'likes'])
+        $items = Item::with(['user', 'likes', 'comments'])
             ->orderBy('created_at', 'desc')
             ->paginate();
 

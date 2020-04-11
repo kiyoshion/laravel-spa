@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $perPage = 15;
+    protected $perPage = 10;
 
     protected $appends = [
-        'likes_count', 'liked_by_user'
+        'comments_count', 'likes_count', 'liked_by_user'
     ];
 
     protected $visible = [
-        'id', 'user', 'body', 'comments', 'likes_count', 'liked_by_user', 
+        'id', 'user', 'title', 'body', 'comments', 'comments_count', 'likes_count', 'liked_by_user', 
     ];
 
     public function user()
@@ -26,6 +26,11 @@ class Item extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment')->orderBy('id', 'desc');
+    }
+
+    public function getCommentsCountAttribute()
+    {
+        return $this->comments->count();
     }
 
     public function likes()

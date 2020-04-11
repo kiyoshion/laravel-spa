@@ -16,9 +16,21 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Auth::routes(['verify' => true]);
+
 Route::get('/user', function() {
     return Auth::user();
 })->name('user');
+
+Route::post('/user/{id}', 'HomeController@update');
+Route::post('/user/{id}/upload', 'HomeController@upload');
+// Route::post('/user/{id}', function() {
+//     dd(request()->all());
+// });
+
+Route::get('/home', 'HomeController@index');
+
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');

@@ -1,13 +1,19 @@
 <template>
     <div>
         <h1>Create</h1>
-        <form class="form" @submit.prevent="submit">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" v-model="title">
-            <label for="body">Body</label>
-            <textarea name="body" id="body" cols="30" rows="5" v-model="body"></textarea>
-            <button type="submit">Submit</button>
-        </form>
+        <div v-if="isVerified">
+            <form class="form" @submit.prevent="submit">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" v-model="title">
+                </div>
+                <div>
+                    <label for="body">Body</label>
+                    <textarea name="body" id="body" cols="30" rows="5" v-model="body"></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -18,6 +24,11 @@ export default {
             title: '',
             body: '',
             userId: ''
+        }
+    },
+    computed: {
+        isVerified() {
+            return this.$store.getters['auth/checkVerified']
         }
     },
     created() {

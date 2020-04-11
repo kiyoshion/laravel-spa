@@ -6,7 +6,7 @@
             :class="{ 'btn--liked': item.liked_by_user }"
             @click="onLikeClick"
         >Like</button>
-        <div v-if="isLogin" class="comment__form">
+        <div v-if="isLogin && isVerified" class="comment__form">
             <form @submit.prevent="storeComment">
                 <label for="body">Commnet</label>
                 <textarea name="body" id="body" cols="30" rows="5" v-model="body"></textarea>
@@ -36,6 +36,9 @@ export default {
         isLogin() {
             return this.$store.getters['auth/check']
         },
+        isVerified() {
+            return this.$store.getters['auth/checkVerified']
+        }
     },
     data() {
         return {
@@ -53,6 +56,10 @@ export default {
             this.item_id = res.data.id
         },
         async storeComment() {
+            if (this.body == '') {
+                alert('コメントを入力してください。')
+                return false
+            }
             const res = await axios.post(`/api/items/${this.id}/comments`, {
                 body: this.body,
                 item_id: this.item_id
@@ -63,6 +70,9 @@ export default {
         onLikeClick () {
             if (!this.isLogin) {
                 alert('ログインしてください')
+                return false
+            } else if (!this.isVerified) {
+                alert('メール認証を完了させてください')
                 return false
             }
 
