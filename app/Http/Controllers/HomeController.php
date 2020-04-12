@@ -35,7 +35,7 @@ class HomeController extends Controller
     public function upload(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $file_name = date('YmdHis') . '-' . $request->file->getClientOriginalName();
+        $file_name = date('YmdHis') . '-' . $id;
         $file_path = '/images/users/' . $id . '/avatar/';
         if (!file_exists(public_path() . $file_path)) {
             mkdir(public_path() . $file_path, 666, true);

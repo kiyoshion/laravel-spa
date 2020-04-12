@@ -23,6 +23,8 @@ Route::get('/user', function() {
     return Auth::user();
 })->name('user');
 
+Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/user/{id}', 'HomeController@update');
 Route::post('/user/{id}/upload', 'HomeController@upload');
 // Route::post('/user/{id}', function() {

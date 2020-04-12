@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="!checkVerified">
-            <p>メール認証を完了させてください。</p>
+            <p>メール認証を完了させてください。<br>7日を過ぎると該当のメールアドレスで登録できなくなります。</p>
         </div>
     </div>
 </template>

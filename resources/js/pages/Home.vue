@@ -2,7 +2,8 @@
     <div>
         <div>
             <div class="user__avatar">
-                <img :src="$store.state.auth.user.avatar" alt="">
+                <img v-if="$store.state.auth.user.avatar" :src="$store.state.auth.user.avatar" alt="">
+                <img v-else src="/images/users/default/avatar/avatar.svg" alt="">
             </div>
             <div class="user__name">
                 <p>{{ name }}</p>
@@ -36,12 +37,12 @@
                 <input type="file" @change="inputFile">
                 <div>
                     <img v-if="uploadImage" class="form__preview" :src="uploadImage" alt="">
-                    <img v-else class="form__preview" :src="$store.state.auth.user.avatar" alt="">
+                    <img v-else-if="$store.state.auth.user.avatar" class="form__preview" :src="$store.state.auth.user.avatar" alt="">
+                    <img v-else class="form__preview" src="/images/users/default/avatar/avatar.svg" alt="">
                 </div>
                 <button type="submit">画像設定</button>
                 <button @click="imageShowToggle">キャンセル</button>
             </form>
-
         </div>
         <Item
             v-for="(item, index) in items"
@@ -80,6 +81,7 @@ export default {
             avatarName: '',
             uploadImage: '',
             file: '',
+            email: '',
         }
     },
     components: {

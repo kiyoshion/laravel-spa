@@ -6,6 +6,7 @@ import ItemList from './pages/ItemList.vue'
 import ItemCreate from './pages/ItemCreate.vue'
 import ItemShow from './pages/ItemShow.vue'
 import Home from './pages/Home.vue'
+import PasswordReset from './pages/PasswordReset.vue'
 
 import SystemError from './errors/SystemError.vue'
 
@@ -33,6 +34,10 @@ const routes = [
             }
         },
         name: 'login'
+    },
+    {
+        path: '/password/reset/:token',
+        component: PasswordReset
     },
     {
         path: '/items/create',
